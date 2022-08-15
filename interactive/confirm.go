@@ -1,4 +1,4 @@
-package intertive
+package interactive
 
 import (
 	inf "github.com/fzdwx/infinite"
