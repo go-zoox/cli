@@ -19,5 +19,3 @@ require (
 	golang.org/x/term v0.0.0-20220722155259-a9ba230a4035 // indirect
 	golang.org/x/text v0.3.7 // indirect
 )
-
-replace github.com/go-zoox/chalk => ../../go-zoox/chalk
