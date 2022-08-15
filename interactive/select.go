@@ -1,53 +1,48 @@
 package interactive
 
-import (
-	"fmt"
+import "github.com/AlecAivazis/survey/v2"
 
-	"github.com/charmbracelet/bubbles/key"
-	inf "github.com/fzdwx/infinite"
-	"github.com/fzdwx/infinite/components"
-	"github.com/fzdwx/infinite/components/selection/singleselect"
-)
+type SelectOptions struct {
+	Default string
+}
 
-// SelectOption is the option for InquireSelect.
-type SelectOption[T any] struct {
-	Key   string
-	Value T
+// SelectOption is the option for Select.
+type SelectOption struct {
+	Label string
+	Value string
 }
 
 // Select asks for a selection.
-func Select[T any](question string, options []SelectOption[T]) (*T, error) {
+func Select(question string, options []SelectOption, opts ...*SelectOptions) (string, error) {
+	var defaultValue string
+	if len(opts) > 0 && opts[0] != nil {
+		defaultValue = opts[0].Default
+	}
+
 	choices := []string{}
+	optionsIndexLabel := map[string]string{}
 	for _, opt := range options {
-		choices = append(choices, opt.Key)
+		choices = append(choices, opt.Label)
+		optionsIndexLabel[opt.Label] = opt.Value
+
+		if defaultValue != "" && defaultValue == opt.Value {
+			defaultValue = opt.Label
+		}
 	}
 
-	selected, err := inf.NewSingleSelect(
-		choices,
-		singleselect.WithDisableFilter(),
-		singleselect.WithKeyBinding(components.SelectionKeyMap{
-			Up: key.NewBinding(
-				key.WithKeys("up"),
-				key.WithHelp("↑", "move up"),
-			),
-			Down: key.NewBinding(
-				key.WithKeys("down"),
-				key.WithHelp("↓", "move down"),
-			),
-			Choice: key.NewBinding(
-				key.WithKeys("enter"),
-				key.WithHelp("enter", "choose it"),
-			),
-			// @TODO
-			Confirm: key.NewBinding(
-				key.WithKeys("ctrl+c", "enter"),
-				key.WithHelp("ctrl+c", "quit"),
-			),
-		}),
-	).Display(question)
+	q := &survey.Select{
+		Message: question,
+		Options: choices,
+	}
+	if defaultValue != "" {
+		q.Default = defaultValue
+	}
+
+	var label string
+	err := survey.AskOne(q, &label)
 	if err != nil {
-		return nil, fmt.Errorf("Quit")
+		return "", err
 	}
 
-	return &options[selected].Value, nil
+	return optionsIndexLabel[label], nil
 }

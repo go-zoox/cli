@@ -1,34 +1,29 @@
 package interactive
 
-import (
-	inf "github.com/fzdwx/infinite"
-	"github.com/fzdwx/infinite/components/input/confirm"
-	"github.com/fzdwx/infinite/emoji"
-)
+import "github.com/AlecAivazis/survey/v2"
+
+// ConfirmOptions is the options for Confirm.
+type ConfirmOptions struct {
+	Default bool
+}
 
 // Confirm asks for a confirmation.
-func Confirm(question string, defaultValue ...bool) (bool, error) {
-	defaultValueX := false
-	if len(defaultValue) > 0 {
-		defaultValueX = defaultValue[0]
+func Confirm(question string, opts ...*ConfirmOptions) (bool, error) {
+	var defaultValue bool
+	if len(opts) > 0 && opts[0] != nil {
+		defaultValue = opts[0].Default
 	}
 
-	opts := []confirm.Option{
-		confirm.WithPrompt(question),
-		confirm.WithDisplayHelp(),
-		confirm.WithSymbol(emoji.Question),
+	q := &survey.Confirm{
+		Message: question,
+		Default: defaultValue,
 	}
 
-	if defaultValueX {
-		opts = append(opts, confirm.WithDefaultYes())
-	}
-
-	c := inf.NewConfirm(opts...)
-
-	ok, err := c.Display()
+	var value bool
+	err := survey.AskOne(q, &value)
 	if err != nil {
 		return false, err
 	}
 
-	return ok, nil
+	return value, nil
 }

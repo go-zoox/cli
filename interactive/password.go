@@ -4,25 +4,19 @@ import (
 	"github.com/AlecAivazis/survey/v2"
 )
 
-// TextOptions is the options for Text.
-type TextOptions struct {
-	Default  string
+// PasswordOptions is the options for Password.
+type PasswordOptions struct {
 	Required bool
 }
 
-// Text asks for a text input.
-func Text(question string, opts ...*TextOptions) (string, error) {
-	defaultValue := ""
+// Password asks for a text input.
+func Password(question string, opts ...*PasswordOptions) (string, error) {
 	required := false
 	if len(opts) > 0 && opts[0] != nil {
-		defaultValue = opts[0].Default
 		required = opts[0].Required
 	}
 
-	q := &survey.Input{Message: question}
-	if defaultValue != "" {
-		q.Default = defaultValue
-	}
+	q := &survey.Password{Message: question}
 
 	var value string
 	err := survey.AskOne(q, &value, func(options *survey.AskOptions) error {
