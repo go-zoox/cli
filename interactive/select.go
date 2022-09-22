@@ -2,6 +2,7 @@ package interactive
 
 import "github.com/AlecAivazis/survey/v2"
 
+// SelectOptions is the options for a select.
 type SelectOptions struct {
 	Default string
 }

@@ -7,6 +7,7 @@ import (
 	"github.com/AlecAivazis/survey/v2/core"
 )
 
+// MultiSelectOptions is the options for a multi select.
 type MultiSelectOptions struct {
 	Default  []string
 	Required bool
