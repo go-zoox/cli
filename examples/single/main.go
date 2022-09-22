@@ -8,8 +8,9 @@ import (
 
 func main() {
 	app := cli.NewSingleProgram(&cli.SingleProgramConfig{
-		Name:  "single",
-		Usage: "single is a program that has a single command.",
+		Name:    "single",
+		Usage:   "single is a program that has a single command.",
+		Version: "0.0.1",
 	})
 
 	app.Command(func(ctx *cli.Context) error {
