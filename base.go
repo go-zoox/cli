@@ -1,6 +1,17 @@
 package cli
 
-import ucli "github.com/urfave/cli/v2"
+import (
+	"fmt"
+
+	ucli "github.com/urfave/cli/v2"
+)
+
+func init() {
+	// @TODO Override the default version printer.
+	ucli.VersionPrinter = func(c *Context) {
+		_, _ = fmt.Fprintf(c.App.Writer, "v%s\n", c.App.Version)
+	}
+}
 
 // Context ...
 type Context = ucli.Context
