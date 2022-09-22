@@ -39,6 +39,8 @@ type SingleProgramConfig struct {
 	HideHelpCommand bool
 	// Boolean to hide built-in version flag and the VERSION section of help
 	HideVersion bool
+	// List of flags to parse
+	Flags []Flag
 }
 
 // NewSingleProgram creates a new SingleProgram.
@@ -65,6 +67,7 @@ func (c *SingleProgram) app() (*ucli.App, error) {
 		HideHelpCommand:      c.cfg.HideHelpCommand,
 		HideVersion:          c.cfg.HideVersion,
 		//
+		Flags:  c.cfg.Flags,
 		Action: c.action,
 	}, nil
 }
