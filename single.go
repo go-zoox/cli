@@ -78,13 +78,11 @@ func (c *SingleProgram) Command(command Action) {
 }
 
 // Run runs the program.
-func (c *SingleProgram) Run() {
+func (c *SingleProgram) Run() error {
 	app, err := c.app()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if err := app.Run(os.Args); err != nil {
-		log.Fatal(err)
-	}
+	return app.Run(os.Args)
 }
