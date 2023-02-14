@@ -86,13 +86,11 @@ func (c *MultipleProgram) Register(name string, cmd *Command) error {
 }
 
 // Run runs the program.
-func (c *MultipleProgram) Run() {
+func (c *MultipleProgram) Run() error {
 	app, err := c.app()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if err := app.Run(os.Args); err != nil {
-		log.Fatal(err)
-	}
+	return app.Run(os.Args)
 }
