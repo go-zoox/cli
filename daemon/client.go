@@ -80,12 +80,13 @@ func (c *client) Run() error {
 			}
 		}
 
-		c.cli.Register(cmd.Name, &cli.Command{
-			Name:  cmd.Name,
+		cmdName := cmd.Name
+		c.cli.Register(cmdName, &cli.Command{
+			Name:  cmdName,
 			Usage: cmd.Usage,
 			Flags: flags,
 			Action: func(ctx *cli.Context) error {
-				output, err := c.execute(cmd.Name, os.Args[2:])
+				output, err := c.execute(cmdName, os.Args[2:])
 				if err != nil {
 					return err
 				}
