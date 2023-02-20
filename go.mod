@@ -4,12 +4,20 @@ go 1.18
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.5
+	github.com/go-zoox/dotenv v1.2.3
 	github.com/schollz/progressbar/v3 v3.9.0
 	github.com/urfave/cli/v2 v2.3.0
 )
 
 require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.0-20190314233015-f79a8a8ca69d // indirect
+	github.com/fsnotify/fsnotify v1.5.4 // indirect
+	github.com/go-zoox/core-utils v1.0.4 // indirect
+	github.com/go-zoox/fs v1.3.0 // indirect
+	github.com/go-zoox/tag v1.0.6 // indirect
+	github.com/go-zoox/uuid v0.0.1 // indirect
+	github.com/google/uuid v1.3.0 // indirect
+	github.com/joho/godotenv v1.4.0 // indirect
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.16 // indirect
