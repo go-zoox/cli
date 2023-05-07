@@ -1,6 +1,8 @@
 package cli
 
 import (
+	"fmt"
+
 	"github.com/go-zoox/config"
 )
 
@@ -12,9 +14,15 @@ func LoadConfig(ctx *Context, cfg interface{}, flagKey ...string) error {
 	}
 
 	if ctx.String(flagKeyX) == "" {
+		configName := "config.yml"
+		if ctx.Command.Name != "" {
+			configName = fmt.Sprintf("%s.yml", ctx.Command.Name)
+		}
+
 		// try to load from config, ignore error
 		err := config.Load(cfg, &config.LoadOptions{
-			Name: ctx.App.Name,
+			AppName: ctx.App.Name,
+			Name:    configName,
 		})
 		if err != nil {
 			if !config.IsNotFoundErr(err) {

@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.5
-	github.com/go-zoox/config v1.2.9
+	github.com/go-zoox/config v1.2.10
 	github.com/go-zoox/dotenv v1.2.3
 	github.com/schollz/progressbar/v3 v3.9.0
 	github.com/urfave/cli/v2 v2.24.4
