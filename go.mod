@@ -7,6 +7,7 @@ require (
 	github.com/go-zoox/config v1.2.10
 	github.com/go-zoox/dotenv v1.2.3
 	github.com/go-zoox/fs v1.3.13
+	github.com/go-zoox/logger v1.4.4
 	github.com/schollz/progressbar/v3 v3.9.0
 	github.com/sevlyar/go-daemon v0.1.6
 	github.com/urfave/cli/v2 v2.24.4
@@ -16,7 +17,9 @@ require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/fatih/color v1.13.0 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
+	github.com/go-zoox/chalk v1.0.1 // indirect
 	github.com/go-zoox/core-utils v1.2.9 // indirect
+	github.com/go-zoox/datetime v1.1.0 // indirect
 	github.com/go-zoox/encoding v1.2.1 // indirect
 	github.com/go-zoox/ini v1.0.4 // indirect
 	github.com/go-zoox/tag v1.2.2 // indirect

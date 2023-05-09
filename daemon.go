@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/go-zoox/fs"
+	"github.com/go-zoox/logger"
 	"github.com/sevlyar/go-daemon"
 )
 
@@ -51,6 +52,7 @@ func Daemon(ctx *Context, fn func() error, opts ...*DaemonOptions) (err error) {
 		return err
 	}
 	if d != nil {
+		logger.Infof("daemon started(pid: %d, log: %s)", d.Pid, logFile)
 		return
 	}
 	defer cntxt.Release()
