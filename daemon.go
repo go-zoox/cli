@@ -43,8 +43,8 @@ func Daemon(ctx *Context, fn func() error, opts ...*DaemonOptions) (err error) {
 		LogFileName: logFile,
 		LogFilePerm: 0640,
 		WorkDir:     workdir,
-		Umask:       027,
-		Args:        []string{},
+		// Umask:       027,
+		Args: []string{},
 	}
 
 	d, err := cntxt.Reborn()
