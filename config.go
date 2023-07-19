@@ -10,15 +10,18 @@ import (
 type LoadConfigOptions struct {
 	Required bool
 	FlagKey  string
+	FilePath string
 }
 
 // LoadConfig loads the configuration by app name.
 func LoadConfig(ctx *Context, cfg interface{}, opts ...*LoadConfigOptions) error {
 	flagKeyX := "config"
 	isRequired := false
+	filePath := ""
 	if len(opts) > 0 && opts[0] != nil {
 		flagKeyX = opts[0].FlagKey
 		isRequired = opts[0].Required
+		filePath = opts[0].FilePath
 	}
 
 	if ctx.String(flagKeyX) == "" {
@@ -29,8 +32,9 @@ func LoadConfig(ctx *Context, cfg interface{}, opts ...*LoadConfigOptions) error
 
 		// try to load from config, ignore error
 		err := config.Load(cfg, &config.LoadOptions{
-			AppName: ctx.App.Name,
-			Name:    configName,
+			AppName:  ctx.App.Name,
+			Name:     configName,
+			FilePath: filePath,
 		})
 		if err != nil {
 			if isRequired {
