@@ -92,8 +92,8 @@ func (c *SingleProgram) Run(arguments ...[]string) error {
 	return app.Run(argumentsX)
 }
 
-// RunWithLog runs the program with log.
-func (c *SingleProgram) RunWithLog() {
+// Serve runs the program with log.
+func (c *SingleProgram) Serve() {
 	if err := c.Run(os.Args); err != nil {
 		log.Fatal(err)
 	}
