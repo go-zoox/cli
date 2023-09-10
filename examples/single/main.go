@@ -18,5 +18,5 @@ func main() {
 		return nil
 	})
 
-	app.Run()
+	app.Serve()
 }
