@@ -85,8 +85,8 @@ func (c *MultipleProgram) Register(name string, cmd *Command) error {
 	return nil
 }
 
-// Run runs the program.
-func (c *MultipleProgram) Run(arguments ...[]string) error {
+// RunWithError runs the program.
+func (c *MultipleProgram) RunWithError(arguments ...[]string) error {
 	argumentsX := os.Args
 	if len(arguments) > 0 && len(arguments[0]) > 0 {
 		argumentsX = arguments[0]
@@ -100,9 +100,9 @@ func (c *MultipleProgram) Run(arguments ...[]string) error {
 	return app.Run(argumentsX)
 }
 
-// Serve runs the program with log.
-func (c *MultipleProgram) Serve() {
-	if err := c.Run(os.Args); err != nil {
+// Run runs the program with log.
+func (c *MultipleProgram) Run() {
+	if err := c.RunWithError(os.Args); err != nil {
 		log.Fatal(err)
 	}
 }

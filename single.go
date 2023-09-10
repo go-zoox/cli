@@ -77,8 +77,8 @@ func (c *SingleProgram) Command(command Action) {
 	c.action = command
 }
 
-// Run runs the program.
-func (c *SingleProgram) Run(arguments ...[]string) error {
+// RunWithError runs the program.
+func (c *SingleProgram) RunWithError(arguments ...[]string) error {
 	argumentsX := os.Args
 	if len(arguments) > 0 && len(arguments[0]) > 0 {
 		argumentsX = arguments[0]
@@ -92,9 +92,9 @@ func (c *SingleProgram) Run(arguments ...[]string) error {
 	return app.Run(argumentsX)
 }
 
-// Serve runs the program with log.
-func (c *SingleProgram) Serve() {
-	if err := c.Run(os.Args); err != nil {
+// Run runs the program with log.
+func (c *SingleProgram) Run() {
+	if err := c.RunWithError(os.Args); err != nil {
 		log.Fatal(err)
 	}
 }

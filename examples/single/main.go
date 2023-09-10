@@ -62,5 +62,5 @@ func main() {
 		return nil
 	})
 
-	app.Serve()
+	app.Run()
 }

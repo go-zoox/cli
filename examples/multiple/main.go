@@ -74,5 +74,5 @@ func main() {
 		},
 	})
 
-	app.Serve()
+	app.Run()
 }
