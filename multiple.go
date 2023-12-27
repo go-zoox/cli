@@ -49,7 +49,7 @@ func NewMultipleProgram(cfg *MultipleProgramConfig) *MultipleProgram {
 	}
 }
 
-func (c *MultipleProgram) app() (*ucli.App, error) {
+func (c *MultipleProgram) create() (*ucli.App, error) {
 	if len(c.commands) == 0 {
 		return nil, fmt.Errorf("command is not set")
 	}
@@ -85,14 +85,24 @@ func (c *MultipleProgram) Register(name string, cmd *Command) error {
 	return nil
 }
 
-// Run runs the program.
-func (c *MultipleProgram) Run() {
-	app, err := c.app()
-	if err != nil {
-		log.Fatal(err)
+// RunWithError runs the program.
+func (c *MultipleProgram) RunWithError(arguments ...[]string) error {
+	argumentsX := os.Args
+	if len(arguments) > 0 && len(arguments[0]) > 0 {
+		argumentsX = arguments[0]
 	}
 
-	if err := app.Run(os.Args); err != nil {
+	app, err := c.create()
+	if err != nil {
+		return err
+	}
+
+	return app.Run(argumentsX)
+}
+
+// Run runs the program with log.
+func (c *MultipleProgram) Run() {
+	if err := c.RunWithError(os.Args); err != nil {
 		log.Fatal(err)
 	}
 }

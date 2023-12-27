@@ -50,7 +50,7 @@ func NewSingleProgram(cfg *SingleProgramConfig) *SingleProgram {
 	}
 }
 
-func (c *SingleProgram) app() (*ucli.App, error) {
+func (c *SingleProgram) create() (*ucli.App, error) {
 	if c.action == nil {
 		return nil, fmt.Errorf("command is not set")
 	}
@@ -77,14 +77,24 @@ func (c *SingleProgram) Command(command Action) {
 	c.action = command
 }
 
-// Run runs the program.
-func (c *SingleProgram) Run() {
-	app, err := c.app()
-	if err != nil {
-		log.Fatal(err)
+// RunWithError runs the program.
+func (c *SingleProgram) RunWithError(arguments ...[]string) error {
+	argumentsX := os.Args
+	if len(arguments) > 0 && len(arguments[0]) > 0 {
+		argumentsX = arguments[0]
 	}
 
-	if err := app.Run(os.Args); err != nil {
+	app, err := c.create()
+	if err != nil {
+		return err
+	}
+
+	return app.Run(argumentsX)
+}
+
+// Run runs the program with log.
+func (c *SingleProgram) Run() {
+	if err := c.RunWithError(os.Args); err != nil {
 		log.Fatal(err)
 	}
 }
