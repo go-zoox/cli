@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.5
-	github.com/go-zoox/config v1.3.0
+	github.com/go-zoox/config v1.3.2
 	github.com/go-zoox/dotenv v1.3.0
 	github.com/go-zoox/fs v1.3.14
 	github.com/go-zoox/logger v1.5.1
@@ -22,7 +22,7 @@ require (
 	github.com/go-zoox/datetime v1.3.1 // indirect
 	github.com/go-zoox/encoding v1.2.1 // indirect
 	github.com/go-zoox/ini v1.0.4 // indirect
-	github.com/go-zoox/tag v1.3.2 // indirect
+	github.com/go-zoox/tag v1.3.4 // indirect
 	github.com/go-zoox/uuid v0.0.1 // indirect
 	github.com/goccy/go-yaml v1.11.3 // indirect
 	github.com/google/uuid v1.6.0 // indirect
