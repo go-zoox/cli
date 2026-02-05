@@ -62,6 +62,13 @@ export default defineConfig({
           ]
         },
         {
+          text: 'Tools',
+          items: [
+            { text: 'CLI Tool (init)', link: '/guide/scaffold' },
+            { text: 'Roadmap', link: '/guide/roadmap' }
+          ]
+        },
+        {
           text: 'Advanced',
           items: [
             { text: 'Daemon Mode', link: '/guide/daemon' }
@@ -75,7 +82,8 @@ export default defineConfig({
             { text: 'Single Command', link: '/examples/single' },
             { text: 'Multiple Commands', link: '/examples/multiple' },
             { text: 'Interactive', link: '/examples/interactive' },
-            { text: 'Loading', link: '/examples/loading' }
+            { text: 'Loading', link: '/examples/loading' },
+            { text: 'Scaffold', link: '/examples/scaffold' }
           ]
         }
       ],

@@ -13,6 +13,26 @@ To install the package, run:
 go get github.com/go-zoox/cli
 ```
 
+## CLI Tool
+
+Quickly generate CLI application templates using the CLI tool:
+
+```bash
+# Install CLI tool
+go install github.com/go-zoox/cli/cmd/cli@latest
+
+# Generate a new CLI project
+cli init
+```
+
+The CLI tool provides an interactive way to create CLI applications with:
+- Single or multiple commands
+- Flag configuration
+- Automatic code generation
+- Project structure setup
+
+See [CLI Tool Documentation](https://go-zoox.github.io/cli/guide/scaffold) for more details.
+
 ## Getting Started
 
 ### Example: Single Command CLI
@@ -336,6 +356,10 @@ func main() {
 - [go-zoox/gzproxy](https://github.com/go-zoox/gzproxy) - Easy to proxy with your http server or any another upstream. Built in supports Basic Auth, Bearer Toke, OAuth2 (GitHub, Feishu, Doreamon, etc.) .
 - [go-zoox/gzcaas](https://github.com/go-zoox/gzcaas) - CLI for CaaS (Commands as a Service). Make run commands remotes as local.
 
+
+## Roadmap
+
+See [ROADMAP.md](./ROADMAP.md) for planned features and [TODO.md](./TODO.md) for current tasks.
 
 ## License
 GoZoox is released under the [MIT License](./LICENSE).
