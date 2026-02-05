@@ -1,0 +1,16 @@
+{
+  "name": "cli-docs",
+  "version": "1.0.0",
+  "description": "Documentation for go-zoox/cli",
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.3",
+    "typescript": "^5.6.3",
+    "@types/node": "^22.10.1"
+  }
+}
