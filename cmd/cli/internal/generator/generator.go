@@ -124,10 +124,11 @@ func main() {
 }
 
 func (g *Generator) generateMainFileMultiple(info *prompts.ProjectInfo, commands []prompts.CommandInfo) error {
-	tmpl := `package main
+	// main.go 只负责创建 app，并从 commands 目录中注册命令
+	mainTmpl := `package main
 
 import (
-	"fmt"
+	"{{.ModuleName}}/commands"
 
 	"github.com/go-zoox/cli"
 )
@@ -138,7 +139,25 @@ func main() {
 		Usage: "{{.Usage}}",
 	})
 
-{{range .Commands}}	app.Register("{{.Name}}", &cli.Command{
+{{range .Commands}}	app.Register(commands.{{.FuncName}}())
+{{end}}
+
+	app.Run()
+}
+`
+
+	// 为每个命令生成 commands/<name>.go（每个文件一个命令，返回 *cli.Command）
+	commandFileTmpl := `package commands
+
+import (
+	"fmt"
+
+	"github.com/go-zoox/cli"
+)
+
+// {{.FuncName}} returns the "{{.Name}}" command.
+func {{.FuncName}}() *cli.Command {
+	return &cli.Command{
 		Name:  "{{.Name}}",
 		Usage: "{{.Usage}}",
 		Flags: []cli.Flag{
@@ -159,14 +178,49 @@ func main() {
 			}
 {{end}}{{end}}			return nil
 		},
-	})
-
-{{end}}	app.Run()
+	}
 }
 `
 
+	// 构建模板数据，包含 ModuleName 和命令函数名
 	data := g.buildTemplateDataMultiple(info, commands)
-	return g.writeTemplate("main.go", tmpl, data)
+
+	// 为每个命令增加 FuncName 字段（用于函数名）
+	cmds, _ := data["Commands"].([]map[string]interface{})
+	for i, c := range cmds {
+		name, _ := c["Name"].(string)
+		cmds[i]["FuncName"] = capitalize(name)
+	}
+	data["Commands"] = cmds
+
+	// 写 main.go
+	if err := g.writeTemplate("main.go", mainTmpl, data); err != nil {
+		return err
+	}
+
+	// 创建 commands 目录
+	commandsDir := filepath.Join(g.outputDir, "commands")
+	if err := os.MkdirAll(commandsDir, 0755); err != nil {
+		return fmt.Errorf("failed to create commands directory: %w", err)
+	}
+
+	// 为每个命令写独立文件 commands/<name>.go
+	for _, c := range cmds {
+		name, _ := c["Name"].(string)
+		funcName, _ := c["FuncName"].(string)
+		cmdData := map[string]interface{}{
+			"Name":     name,
+			"Usage":    c["Usage"],
+			"Flags":    c["Flags"],
+			"FuncName": funcName,
+		}
+		filename := fmt.Sprintf("commands/%s.go", name)
+		if err := g.writeTemplate(filename, commandFileTmpl, cmdData); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 func (g *Generator) generateGoMod(info *prompts.ProjectInfo) error {
@@ -188,8 +242,8 @@ func (g *Generator) generateREADME(info *prompts.ProjectInfo) error {
 	tmpl := "# {{.Name}}\n\n{{.Usage}}\n\n## Installation\n\n```bash\ngo get {{.ModuleName}}\n```\n\n## Usage\n\n```bash\n{{.Name}} --help\n```\n\n## Development\n\n```bash\ngo run main.go\n```\n\n## License\n\nMIT\n"
 
 	data := map[string]interface{}{
-		"Name":      info.Name,
-		"Usage":     info.Usage,
+		"Name":       info.Name,
+		"Usage":      info.Usage,
 		"ModuleName": info.Name,
 	}
 
@@ -260,10 +314,11 @@ func (g *Generator) buildTemplateDataMultiple(info *prompts.ProjectInfo, command
 	}
 
 	return map[string]interface{}{
-		"Name":     info.Name,
-		"Usage":    info.Usage,
-		"Version":  info.Version,
-		"Commands": processedCommands,
+		"Name":       info.Name,
+		"Usage":      info.Usage,
+		"Version":    info.Version,
+		"ModuleName": info.Name,
+		"Commands":   processedCommands,
 	}
 }
 
@@ -294,18 +349,18 @@ func (g *Generator) processFlag(flag prompts.FlagInfo) map[string]interface{} {
 	}
 
 	return map[string]interface{}{
-		"Name":        flag.Name,
-		"Type":        flag.Type,
-		"TypeFlag":    typeFlag,
-		"Usage":       flag.Usage,
-		"Default":     flag.Default,
-		"HasDefault":  hasDefault,
+		"Name":         flag.Name,
+		"Type":         flag.Type,
+		"TypeFlag":     typeFlag,
+		"Usage":        flag.Usage,
+		"Default":      flag.Default,
+		"HasDefault":   hasDefault,
 		"DefaultValue": defaultValue,
-		"Aliases":     flag.Aliases,
-		"HasAliases":  len(flag.Aliases) > 0,
-		"EnvVars":     flag.EnvVars,
-		"HasEnvVars":  len(flag.EnvVars) > 0,
-		"Getter":      getter,
+		"Aliases":      flag.Aliases,
+		"HasAliases":   len(flag.Aliases) > 0,
+		"EnvVars":      flag.EnvVars,
+		"HasEnvVars":   len(flag.EnvVars) > 0,
+		"Getter":       getter,
 	}
 }
 

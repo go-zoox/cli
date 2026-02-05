@@ -31,12 +31,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Complete API reference
   - Interactive examples
   - Loading component examples
-  - Scaffold tool documentation
+  - CLI tool documentation
   - GitHub Pages deployment via GitHub Actions
 
 ### Features
 
-#### Scaffold Tool Features
+#### CLI Tool Features
 
 - **Interactive Prompts**:
   - Project name, usage, and version collection
@@ -61,9 +61,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Documentation
 
-- Added scaffold tool guide at `/guide/scaffold`
-- Added scaffold examples at `/examples/scaffold`
-- Updated VitePress configuration to include scaffold documentation
+- Added CLI tool guide at `/guide/cli-tool`
+- Added CLI tool examples at `/examples/cli-tool`
+- Updated VitePress configuration to include CLI tool documentation
 - Added comprehensive usage examples and best practices
 
 ### Technical Details
@@ -105,11 +105,11 @@ cli init --name myapp --type single --output ./myapp --skip-interactive
 ### Changed
 
 - Enhanced documentation structure with new sections
-- Improved developer experience with scaffold tool
+- Improved developer experience with CLI tool
 
 ### Fixed
 
-- N/A (initial scaffold tool release)
+- N/A (initial CLI tool release)
 
 ---
 

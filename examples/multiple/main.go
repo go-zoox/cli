@@ -12,7 +12,7 @@ func main() {
 		Usage: "multiple is a program that has multiple commands.",
 	})
 
-	app.Register("list", &cli.Command{
+	app.Register(&cli.Command{
 		Name:  "list",
 		Usage: "list is a command that lists things.",
 		Flags: []cli.Flag{
@@ -65,7 +65,7 @@ func main() {
 		},
 	})
 
-	app.Register("create", &cli.Command{
+	app.Register(&cli.Command{
 		Name:  "create",
 		Usage: "create is a command that creates things.",
 		Action: func(ctx *cli.Context) error {

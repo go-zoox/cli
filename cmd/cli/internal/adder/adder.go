@@ -107,7 +107,6 @@ func (a *Adder) AddFlag(flag *prompts.FlagInfo, commandName string) error {
 	return nil
 }
 
-
 func (a *Adder) generateCommandCode(cmd *prompts.CommandInfo) string {
 	var flagsCode strings.Builder
 	for _, flag := range cmd.Flags {
@@ -242,7 +241,6 @@ func (a *Adder) findCommandFlagsInsertPosition(content string, commandName strin
 
 	return flagsStart + strings.Index(content[flagsStart:], "{") + 1
 }
-
 
 func capitalize(s string) string {
 	if len(s) == 0 {

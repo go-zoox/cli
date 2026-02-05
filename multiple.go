@@ -76,12 +76,12 @@ func (c *MultipleProgram) create() (*ucli.App, error) {
 }
 
 // Register registers a command.
-func (c *MultipleProgram) Register(name string, cmd *Command) error {
-	if _, ok := c.commands[name]; ok {
-		return fmt.Errorf("command %s is already registered", name)
+func (c *MultipleProgram) Register(cmd *Command) error {
+	if _, ok := c.commands[cmd.Name]; ok {
+		return fmt.Errorf("command %s is already registered", cmd.Name)
 	}
 
-	c.commands[name] = cmd
+	c.commands[cmd.Name] = cmd
 	return nil
 }
 

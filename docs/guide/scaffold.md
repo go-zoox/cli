@@ -2,6 +2,8 @@
 
 The `cli init` command helps you quickly generate CLI application templates using the go-zoox/cli framework.
 
+> **Note**: For a complete guide to all CLI tool commands, see [CLI Tool Complete Guide](/guide/cli-tool).
+
 ## Installation
 
 The CLI tool is included in the CLI framework. To use it, you need to build it:
@@ -29,22 +31,22 @@ cli init
 This will guide you through:
 1. Project name and description
 2. CLI type (single or multiple commands)
-3. Flags configuration
-4. Commands configuration (for multiple commands mode)
+
+The tool will automatically generate example flags and commands for you to get started quickly.
 
 ### Mixed Mode (Recommended)
 
 You can provide some parameters via command line, and the tool will only ask for the missing ones:
 
 ```bash
-# Provide name, tool will ask for other details
+# Provide name, tool will ask for type
 cli init --name myapp
 
-# Provide name and type, tool will ask for flags and commands
+# Provide name and type, tool will generate example code directly
 cli init --name myapp --type multiple
 
-# Provide all parameters, tool will only ask for confirmation
-cli init --name myapp --type single --output ./myapp
+# Provide all parameters, skip all prompts
+cli init --name myapp --type single --output ./myapp --skip-interactive
 ```
 
 ### Non-Interactive Mode
@@ -95,26 +97,19 @@ This creates a new multiple commands CLI application where you can add multiple 
 - **Version**: Version number (default: `0.1.0`)
 - **CLI type**: Choose between single command or multiple commands
 
-### Flags Configuration
+### Generated Examples
 
-For each flag, you'll be asked:
-- **Flag name**: The name of the flag (e.g., `port`)
-- **Flag type**: Choose from:
-  - String
-  - Int
-  - Bool
-  - String Slice
-- **Usage/Description**: Description of what the flag does
-- **Default value**: Optional default value
-- **Short alias**: Optional short form (e.g., `-p` for `--port`)
-- **Environment variable**: Optional environment variable name
+The tool automatically generates example code to help you get started:
 
-### Commands Configuration (Multiple Commands Mode)
+**Single Command Mode** includes:
+- `--name` flag (string, default: "World", alias: `-n`)
+- `--verbose` flag (bool, alias: `-v`)
 
-For each command, you'll be asked:
-- **Command name**: The name of the command (e.g., `list`, `create`)
-- **Usage/Description**: Description of what the command does
-- **Flags**: Optional flags for this command (same process as above)
+**Multiple Commands Mode** includes:
+- `list` command with `--all` flag (bool, alias: `-a`)
+- `create` command with `--name` flag (string, required, alias: `-n`)
+
+You can modify these examples or use the `cli add` command to add more commands and flags later.
 
 ## Generated Files
 
@@ -153,10 +148,10 @@ A standard Go `.gitignore` file that excludes:
 ### Example 1: Simple Single Command CLI
 
 ```bash
-scaffold init --name greet --type single
+cli init --name greet --type single
 ```
 
-Then follow the prompts to add a `name` flag. The generated code will look like:
+The generated code will include example flags. Here's what it looks like:
 
 ```go
 app.Command(func(ctx *cli.Context) error {
@@ -169,10 +164,10 @@ app.Command(func(ctx *cli.Context) error {
 ### Example 2: Multiple Commands CLI
 
 ```bash
-scaffold init --name todo --type multiple
+cli init --name todo --type multiple
 ```
 
-Add commands like `list`, `add`, `remove` with their respective flags.
+The generated code will include example commands (`list` and `create`) with their flags. You can modify or add more commands using `cli add`.
 
 ## Add Command
 
@@ -253,10 +248,11 @@ After generating your CLI project:
 ## Tips
 
 - Use mixed mode for the best experience - provide what you know, let the tool ask for the rest
-- You can combine command-line flags with interactive prompts
-- Use `--skip-interactive` only when you have all required parameters
+- The tool generates example code automatically - you can modify it or add more using `cli add`
+- Use `--skip-interactive` to skip all prompts when you have all required parameters
 - You can always edit the generated code to customize it
 - The generated code includes TODO comments to guide you
+- Use `cli add` to add more commands and flags after initialization
 - All flags support environment variables automatically
 - Short aliases make your CLI more user-friendly
 
@@ -276,3 +272,15 @@ Make sure you have write permissions in the output directory.
 ### Generated code doesn't compile
 
 Run `go mod tidy` to ensure all dependencies are properly resolved.
+
+## Related Commands
+
+After initializing your project, you can use other CLI tool commands:
+
+- [`cli add`](/guide/cli-tool#add) - Add commands or flags
+- [`cli list`](/guide/cli-tool#list) - List commands and flags
+- [`cli validate`](/guide/cli-tool#validate) - Validate project structure
+- [`cli format`](/guide/cli-tool#format) - Format code
+- [`cli build`](/guide/cli-tool#build) - Build project
+
+See [CLI Tool Complete Guide](/guide/cli-tool) for all available commands.

@@ -11,6 +11,7 @@ require (
 	github.com/schollz/progressbar/v3 v3.9.0
 	github.com/sevlyar/go-daemon v0.1.6
 	github.com/urfave/cli/v2 v2.27.4
+	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
@@ -52,5 +53,4 @@ require (
 	golang.org/x/term v0.13.0 // indirect
 	golang.org/x/text v0.13.0 // indirect
 	golang.org/x/xerrors v0.0.0-20240903120638-7835f813f4da // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

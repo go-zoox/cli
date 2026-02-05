@@ -64,6 +64,7 @@ export default defineConfig({
         {
           text: 'Tools',
           items: [
+            { text: 'CLI Tool Overview', link: '/guide/cli-tool' },
             { text: 'CLI Tool (init)', link: '/guide/scaffold' },
             { text: 'Roadmap', link: '/guide/roadmap' }
           ]
@@ -83,7 +84,8 @@ export default defineConfig({
             { text: 'Multiple Commands', link: '/examples/multiple' },
             { text: 'Interactive', link: '/examples/interactive' },
             { text: 'Loading', link: '/examples/loading' },
-            { text: 'Scaffold', link: '/examples/scaffold' }
+            { text: 'Scaffold', link: '/examples/scaffold' },
+            { text: 'CLI Tool', link: '/examples/cli-tool' }
           ]
         }
       ],

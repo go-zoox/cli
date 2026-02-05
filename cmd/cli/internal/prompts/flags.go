@@ -55,7 +55,7 @@ func CollectSingleFlagWithName(defaultName string) (*FlagInfo, error) {
 func collectSingleFlag(defaultName string) (*FlagInfo, error) {
 	var name string
 	var err error
-	
+
 	if defaultName != "" {
 		name = defaultName
 		fmt.Printf("Flag name: %s\n", name)

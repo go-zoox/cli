@@ -21,3 +21,5 @@ go-cli
 data/
 
 .DS_Store
+
+tmp/

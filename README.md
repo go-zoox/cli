@@ -15,7 +15,7 @@ go get github.com/go-zoox/cli
 
 ## CLI Tool
 
-Quickly generate CLI application templates using the CLI tool:
+The CLI tool provides a comprehensive toolkit for managing CLI projects:
 
 ```bash
 # Install CLI tool
@@ -23,15 +23,39 @@ go install github.com/go-zoox/cli/cmd/cli@latest
 
 # Generate a new CLI project
 cli init
+
+# List all available commands
+cli --help
 ```
 
-The CLI tool provides an interactive way to create CLI applications with:
-- Single or multiple commands
-- Flag configuration
-- Automatic code generation
-- Project structure setup
+### Key Features
 
-See [CLI Tool Documentation](https://go-zoox.github.io/cli/guide/scaffold) for more details.
+- **Project Management**: Initialize, add, remove, update commands and flags
+- **Code Quality**: Format, lint, and generate tests
+- **Templates**: Use built-in templates or create custom ones
+- **Documentation**: Generate docs, man pages, and shell completions
+- **Development Tools**: Build, run, and watch for changes
+
+### Quick Start
+
+```bash
+# Initialize a new project
+cli init --name myapp --type multiple
+
+# Add a command
+cli add --command list
+
+# Validate project
+cli validate
+
+# Format code
+cli format
+
+# Build project
+cli build
+```
+
+See [CLI Tool Complete Guide](https://go-zoox.github.io/cli/guide/cli-tool) for all available commands and [Examples](https://go-zoox.github.io/cli/examples/cli-tool) for usage examples.
 
 ## Getting Started
 
@@ -123,7 +147,7 @@ func main() {
 		Usage: "multiple is a program that has multiple commands.",
 	})
 
-	app.Register("list", &cli.Command{
+	app.Register(&cli.Command{
 		Name:  "list",
 		Usage: "list is a command that lists things.",
 		Flags: []cli.Flag{
@@ -176,7 +200,7 @@ func main() {
 		},
 	})
 
-	app.Register("create", &cli.Command{
+	app.Register(&cli.Command{
 		Name:  "create",
 		Usage: "create is a command that creates things.",
 		Action: func(ctx *cli.Context) error {
