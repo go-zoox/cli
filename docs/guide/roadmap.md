@@ -1,6 +1,6 @@
 # CLI Tool Roadmap
 
-本文档概述了 CLI 工具的未来发展计划。详细内容请参考项目根目录的 [ROADMAP.md](../../ROADMAP.md) 和 [TODO.md](../../TODO.md)。
+本文档概述了 CLI 工具的未来发展计划。详细内容请参考项目根目录的 [ROADMAP.md](https://github.com/go-zoox/cli/blob/master/ROADMAP.md) 和 [TODO.md](https://github.com/go-zoox/cli/blob/master/TODO.md)。
 
 ## 快速概览
 
@@ -57,8 +57,8 @@
 ## 完整路线图
 
 查看完整的功能规划和实施计划：
-- [ROADMAP.md](../../ROADMAP.md) - 详细功能规划
-- [TODO.md](../../TODO.md) - 具体任务列表
+- [ROADMAP.md](https://github.com/go-zoox/cli/blob/master/ROADMAP.md) - 详细功能规划
+- [TODO.md](https://github.com/go-zoox/cli/blob/master/TODO.md) - 具体任务列表
 
 ## 贡献
 
